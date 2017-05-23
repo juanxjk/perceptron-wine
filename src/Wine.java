@@ -1,126 +1,60 @@
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
+import org.omg.CORBA.DoubleSeqHelper;
 
 public class Wine {
-	private double alcohol;
-	private double malicAcid;
-	private double ash;
-	private double alcalinityOfAsh;
-	private double magnesium;
-	private double totalPhenols;
-	private double flavanoids;
-	private double nonflavanoidPhenols;
-	private double proanthocyanins;
-	private double colorIntensity;
-	private double hue;
-	private double oD280;
-	private double Proline;
+	/**
+	 * 1 producer; 2 alcohol; 3 malicAcid; 4 ash; 5 alcalinityOfAsh; 6
+	 * magnesium; 7 totalPhenols; 8 flavanoids; 9 nonflavanoidPhenols; 10
+	 * proanthocyanins; 11 colorIntensity; 12 hue; 13 oD280; 14 Proline;
+	 */
+	/**
+	 * Lista com todos os valores obtidos no arquivo .csv
+	 */
+	private double[] values = new double[14];
 
-	public Wine(double alcohol, double malicAcid, double ash, double alcalinityOfAsh, double magnesium,
-			double totalPhenols, double flavanoids, double nonflavanoidPhenols, double proanthocyanins,
-			double colorIntensity, double hue, double oD280, double Proline) {
+	/**
+	 * @param listValues
+	 */
+	public Wine(List<Double> listValues) {
+		this.setValues(listValues);
 	}
 
-	public double getAlcohol() {
-		return alcohol;
+	/**
+	 * @return
+	 */
+	public double[] getValues() {
+		return values;
 	}
 
-	public void setAlcohol(double alcohol) {
-		this.alcohol = alcohol;
+	/**
+	 * @param values
+	 * @throws IllegalArgumentException
+	 */
+	public void setValues(double[] values) throws IllegalArgumentException {
+		if (values.length != this.values.length)
+			throw new IllegalArgumentException(
+					"Tamanho inválido."); /*- Lança uma excessão para quem estará chamando. */
+		this.values = values;
 	}
 
-	public double getMalicAcid() {
-		return malicAcid;
+	/**
+	 * @param listValues
+	 */
+	public void setValues(List<Double> listValues) {
+		if (listValues.size() != this.values.length)
+			throw new IllegalArgumentException("Tamanho inválido. Size: " + listValues.size());
+		for (int i = 0; i < listValues.size(); i++) {
+			this.values[i] = listValues.get(i);
+		}
+
 	}
 
-	public void setMalicAcid(double malicAcid) {
-		this.malicAcid = malicAcid;
+	@Override
+	public String toString() {
+		String s = Arrays.toString(this.values) + "\n";
+		return s;
 	}
-
-	public double getAsh() {
-		return ash;
-	}
-
-	public void setAsh(double ash) {
-		this.ash = ash;
-	}
-
-	public double getAlcalinityOfAsh() {
-		return alcalinityOfAsh;
-	}
-
-	public void setAlcalinityOfAsh(double alcalinityOfAsh) {
-		this.alcalinityOfAsh = alcalinityOfAsh;
-	}
-
-	public double getMagnesium() {
-		return magnesium;
-	}
-
-	public void setMagnesium(double magnesium) {
-		this.magnesium = magnesium;
-	}
-
-	public double getTotalPhenols() {
-		return totalPhenols;
-	}
-
-	public void setTotalPhenols(double totalPhenols) {
-		this.totalPhenols = totalPhenols;
-	}
-
-	public double getFlavanoids() {
-		return flavanoids;
-	}
-
-	public void setFlavanoids(double flavanoids) {
-		this.flavanoids = flavanoids;
-	}
-
-	public double getNonflavanoidPhenols() {
-		return nonflavanoidPhenols;
-	}
-
-	public void setNonflavanoidPhenols(double nonflavanoidPhenols) {
-		this.nonflavanoidPhenols = nonflavanoidPhenols;
-	}
-
-	public double getProanthocyanins() {
-		return proanthocyanins;
-	}
-
-	public void setProanthocyanins(double proanthocyanins) {
-		this.proanthocyanins = proanthocyanins;
-	}
-
-	public double getColorIntensity() {
-		return colorIntensity;
-	}
-
-	public void setColorIntensity(double colorIntensity) {
-		this.colorIntensity = colorIntensity;
-	}
-
-	public double getHue() {
-		return hue;
-	}
-
-	public void setHue(double hue) {
-		this.hue = hue;
-	}
-
-	public double getoD280() {
-		return oD280;
-	}
-
-	public void setoD280(double oD280) {
-		this.oD280 = oD280;
-	}
-
-	public double getProline() {
-		return Proline;
-	}
-
-	public void setProline(double proline) {
-		Proline = proline;
-	}
-
 }
