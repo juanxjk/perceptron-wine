@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.omg.CORBA.DoubleSeqHelper;
 
-public class Wine {
+public class Wine implements Comparable<Wine> {
 	/**
 	 * 1 producer; 2 alcohol; 3 malicAcid; 4 ash; 5 alcalinityOfAsh; 6
 	 * magnesium; 7 totalPhenols; 8 flavanoids; 9 nonflavanoidPhenols; 10
@@ -56,5 +56,14 @@ public class Wine {
 	public String toString() {
 		String s = Arrays.toString(this.values) + "\n";
 		return s;
+	}
+
+	@Override
+	public int compareTo(Wine o) {
+		if (this.values[0] > o.getValues()[0])
+			return 1;
+		else if (this.values[0] < o.getValues()[0])
+			return -1;
+		return 0;
 	}
 }
