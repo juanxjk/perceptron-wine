@@ -13,12 +13,14 @@ public class Wine implements Comparable<Wine> {
 	/**
 	 * Lista com todos os valores obtidos no arquivo .csv
 	 */
-	private double[] values = new double[14];
+	private int wineClass;
+	private double[] values = new double[13];
 
 	/**
 	 * @param listValues
 	 */
-	public Wine(List<Double> listValues) {
+	public Wine(int wineClass, double[] listValues) {
+		this.setWineClass(wineClass);
 		this.setValues(listValues);
 	}
 
@@ -33,10 +35,7 @@ public class Wine implements Comparable<Wine> {
 	 * @param values
 	 * @throws IllegalArgumentException
 	 */
-	public void setValues(double[] values) throws IllegalArgumentException {
-		if (values.length != this.values.length)
-			throw new IllegalArgumentException(
-					"Tamanho inválido."); /*- Lança uma excessão para quem estará chamando. */
+	public void setValues(double[] values) {
 		this.values = values;
 	}
 
@@ -54,16 +53,26 @@ public class Wine implements Comparable<Wine> {
 
 	@Override
 	public String toString() {
-		String s = Arrays.toString(this.values) + "\n";
+		String s = "Classe: " + this.getWineClass() + " " + Arrays.toString(PerceptronWine.y_(this.getWineClass()))
+				+ "\n";
+		s += "Valores: " + Arrays.toString(this.values) + "\n";
 		return s;
 	}
 
 	@Override
 	public int compareTo(Wine o) {
-		if (this.values[0] > o.getValues()[0])
+		if (this.getWineClass() > o.getWineClass())
 			return 1;
-		else if (this.values[0] < o.getValues()[0])
+		else if (this.getWineClass() < o.getWineClass())
 			return -1;
 		return 0;
+	}
+
+	public int getWineClass() {
+		return this.wineClass;
+	}
+
+	public void setWineClass(int wineClass) {
+		this.wineClass = wineClass;
 	}
 }
